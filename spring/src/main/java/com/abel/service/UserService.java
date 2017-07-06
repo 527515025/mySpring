@@ -20,6 +20,9 @@ public class UserService {
         userDAO.save(user);
     }
 
+    public void detele(User user) {
+        userDAO.detele();
+    }
 
 //    public UserService(UserDAO userDAO) {
 //        super();
