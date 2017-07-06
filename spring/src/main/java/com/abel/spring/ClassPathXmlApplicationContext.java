@@ -19,8 +19,7 @@ public class ClassPathXmlApplicationContext implements BeanFactory {
     public ClassPathXmlApplicationContext() throws Exception {
         //解析xml 利用反射生成 bean
         SAXBuilder sb = new SAXBuilder();
-//        Document doc = sb.build("src/main/resources/test.xml"); //构造文档对象
-        Document doc = sb.build(Sample1.class.getClassLoader().getResourceAsStream("bean.xml")); //构造文档对象
+        Document doc = sb.build("src/main/resources/bean.xml"); //构造文档对象
         Element root = doc.getRootElement(); //获取根元素
         List list = root.getChildren("bean");//取名字为disk的所有元素
         for (int i = 0; i < list.size(); i++) {

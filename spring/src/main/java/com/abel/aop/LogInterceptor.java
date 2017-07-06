@@ -21,12 +21,12 @@ public class LogInterceptor implements InvocationHandler {
     }
 
 
-    public void beforeMethod() {
-        System.out.println("action  begin ..........");
+    public void beforeMethod(Method m) {
+        System.out.println(m.getName()+"  begin ..........");
     }
 
     public Object invoke(Object proxy, Method m, Object[] args) throws Throwable {
-        beforeMethod();
+        beforeMethod(m);
         m.invoke(target, args);
         return null;
     }
