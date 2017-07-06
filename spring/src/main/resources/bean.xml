@@ -1,0 +1,8 @@
+<beans>
+    <bean id="u" class="com.abel.dao.impl.UserDAOImpl" />
+   <!--依赖注入，自动装配-->
+    <bean id="userService" class="com.abel.service.UserService" >
+        <property name="userDAO" bean="u"/>
+    </bean>
+
+</beans>
