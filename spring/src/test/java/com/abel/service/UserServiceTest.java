@@ -26,6 +26,7 @@ public class UserServiceTest {
     }
 
 
+    //通过jdk 的动态代理实现
     @Test
     public void testProxy() {
         //被代理对象
@@ -36,7 +37,9 @@ public class UserServiceTest {
         //1.classloader 代理对象和被代理对象应该处于同一个 classloader
         //2.接口 产生的代理对象应该实现那些接口
         //3.handel 执行代理对象方法时，应用那个handel 处理。
+        //(接口中有什么方法，代理中就有什么方法 代理中的每个方法在调用的时候都会把 方法自身传给 handel, 并把 代理对象和参数都传递过去 )
         UserDAO userDAOProxy = (UserDAO) Proxy.newProxyInstance(userDAO.getClass().getClassLoader(), userDAO.getClass().getInterfaces(), li);
+        System.out.println(userDAOProxy.getClass());
         userDAOProxy.detele();
         userDAOProxy.save(new User());
     }
