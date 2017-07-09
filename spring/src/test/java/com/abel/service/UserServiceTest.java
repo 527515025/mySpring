@@ -38,13 +38,27 @@ public class UserServiceTest {
         //2.接口 产生的代理对象应该实现那些接口
         //3.handel 执行代理对象方法时，应用那个handel 处理。
         //(接口中有什么方法，代理中就有什么方法 代理中的每个方法在调用的时候都会把 方法自身传给 handel, 并把 代理对象和参数都传递过去 )
-        
+
 //      UserDAO userDAOProxy = (UserDAO) Proxy.newProxyInstance(userDAO.getClass().getClassLoader(), userDAO.getClass().getInterfaces(), li);
-        Class[] cl =new Class[1];
+        Class[] cl = new Class[1];
         cl[0] = UserDAO.class;
-        UserDAO userDAOProxy = (UserDAO) Proxy.newProxyInstance(userDAO.getClass().getClassLoader(),cl,li);
+        UserDAO userDAOProxy = (UserDAO) Proxy.newProxyInstance(userDAO.getClass().getClassLoader(), cl, li);
         System.out.println(userDAOProxy.getClass());
         userDAOProxy.detele();
         userDAOProxy.save(new User());
+
+        /**
+         * 代理对象 实现 UserDAO 接口， 实现了 UserDAO 的所有方法。
+         * 执行的时候，
+         * class $Proxy4 implements UserDAO
+         * {
+         * 	save(User u) {
+         * 	//得到当前的 save 方法
+         * 	Method m = UserDAO.getclass.getmethod
+         * 	使用代理对象调用invoke 传递代理自身 this ，传递得到的 method 和 参数
+         * li.invoke(this, m, u)
+         * }
+         * }
+         */
     }
 }
