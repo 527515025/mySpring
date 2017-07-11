@@ -1,6 +1,5 @@
 package com.abel.spring;
 
-import com.abel.Sample1;
 import org.jdom.Document;
 import org.jdom.Element;
 import org.jdom.input.SAXBuilder;

@@ -24,8 +24,4 @@ public class UserService {
         userDAO.detele();
     }
 
-//    public UserService(UserDAO userDAO) {
-//        super();
-//        this.userDAO = userDAO;
-//    }
 }
