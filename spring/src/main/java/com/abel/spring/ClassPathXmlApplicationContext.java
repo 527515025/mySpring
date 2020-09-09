@@ -18,22 +18,29 @@ public class ClassPathXmlApplicationContext implements BeanFactory {
     public ClassPathXmlApplicationContext() throws Exception {
         //解析xml 利用反射生成 bean
         SAXBuilder sb = new SAXBuilder();
-        Document doc = sb.build("src/main/resources/bean.xml"); //构造文档对象
-        Element root = doc.getRootElement(); //获取根元素
-        List list = root.getChildren("bean");//取名字为disk的所有元素
+        //构造文档对象
+        Document doc = sb.build("src/main/resources/bean.xml");
+        //获取根元素
+        Element root = doc.getRootElement();
+        //取名字为disk的所有元素
+        List list = root.getChildren("bean");
         for (int i = 0; i < list.size(); i++) {
             Element element = (Element) list.get(i);
             String id = element.getAttributeValue("id");
-            String className = element.getAttributeValue("class");//取disk子元素capacity的内容
+            //取disk子元素capacity的内容
+            String className = element.getAttributeValue("class");
             System.out.println("id : " + id + " className : " + className);
             Object o = Class.forName(className).newInstance();
             beans.put(id, o);
 
             //依赖注入，自动装配 xml 的第二层
             for (Element propertyElement : (List<Element>) element.getChildren("property")) {
-                String name = propertyElement.getAttributeValue("name"); //userDAO
-                String bean = propertyElement.getAttributeValue("bean"); //u
-                Object beanObj = beans.get(bean);//UserDAOImpl instance
+                //userDAO
+                String name = propertyElement.getAttributeValue("name");
+                //u
+                String bean = propertyElement.getAttributeValue("bean");
+                //UserDAOImpl instance
+                Object beanObj = beans.get(bean);
 
                 //拼出setUserDAO方法名字
                 String methodName = "set" + name.substring(0, 1).toUpperCase() + name.substring(1);

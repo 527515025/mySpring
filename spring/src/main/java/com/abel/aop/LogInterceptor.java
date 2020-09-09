@@ -10,7 +10,7 @@ public class LogInterceptor implements InvocationHandler {
     /**
      * target 被代理对象，可以通过参数传进来
      */
-    private Object target ;
+    private Object target;
 
     public Object getTarget() {
         return target;
@@ -20,17 +20,19 @@ public class LogInterceptor implements InvocationHandler {
         this.target = target;
     }
 
-    //在执行被代理对象的方法前执行的方法，我门要切进去的逻辑
+    /**
+     * 在执行被代理对象的方法前执行的方法，我门要切进去的逻辑
+     */
     public void beforeMethod(Method m) {
-        System.out.println(m.getName()+"  begin ..........");
+        System.out.println(m.getName() + "  begin ..........");
     }
 
 
-    public Object invoke(Object proxy, Method m, Object[] args) throws Throwable {
+    public Object invoke(Object proxy, Method method, Object[] args) throws Throwable {
         //执行我门的逻辑
-        beforeMethod(m);
+        beforeMethod(method);
         //调用被代理对象的方法
-        m.invoke(target, args);
+        method.invoke(target, args);
         return null;
     }
 }
